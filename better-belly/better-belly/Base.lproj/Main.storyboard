@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="LkG-be-B1d">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="I7b-mn-jQr">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,16 +20,58 @@
             </objects>
             <point key="canvasLocation" x="190" y="-67"/>
         </scene>
-        <!--View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="W4d-m9-q3z">
             <objects>
-                <viewController id="I7b-mn-jQr" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="r1l-PI-Txv">
+                <viewController storyboardIdentifier="ImageViewController" id="I7b-mn-jQr" customClass="ImageViewController" customModule="better_belly" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r1l-PI-Txv" customClass="imageview">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="defualtImage" translatesAutoresizingMaskIntoConstraints="NO" id="rf6-5x-2Co">
+                                <rect key="frame" x="53" y="93" width="269" height="308"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <edgeInsets key="layoutMargins" top="8" left="8" bottom="8" right="8"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ok7-rw-80X">
+                                <rect key="frame" x="16" y="456" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="AccountButton" image="person icon">
+                                    <color key="titleShadowColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="d5n-aO-xlh">
+                                <rect key="frame" x="254" y="456" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="StatsButton" image="results icon"/>
+                            </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGe-GW-ayW">
+                                <rect key="frame" x="135" y="456" width="105" height="105"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="CameraButton" image="camera icon"/>
+                                <connections>
+                                    <action selector="cameraButtonPressed:" destination="I7b-mn-jQr" eventType="touchUpInside" id="JYW-lz-wn8"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LLV-WG-7CA"/>
                     </view>
+                    <connections>
+                        <outlet property="accountButton" destination="ok7-rw-80X" id="Mlc-u7-SbK"/>
+                        <outlet property="cameraButton" destination="LGe-GW-ayW" id="Ue6-vS-OqT"/>
+                        <outlet property="imageView" destination="rf6-5x-2Co" id="abJ-39-yfu"/>
+                        <outlet property="statsButton" destination="d5n-aO-xlh" id="sVt-cO-zby"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9dB-BE-bkj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -107,4 +149,10 @@
             <point key="canvasLocation" x="-626.39999999999998" y="-67.016491754122939"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="camera icon" width="304" height="244"/>
+        <image name="defualtImage" width="112" height="112"/>
+        <image name="person icon" width="250" height="250"/>
+        <image name="results icon" width="490" height="304"/>
+    </resources>
 </document>

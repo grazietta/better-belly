@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2088A577214D814000627DFC /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2088A576214D814000627DFC /* ImageViewController.swift */; };
 		209FA94F214D44FA003CFFED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209FA94E214D44FA003CFFED /* AppDelegate.swift */; };
 		209FA951214D44FA003CFFED /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 209FA950214D44FA003CFFED /* ViewController.swift */; };
 		209FA954214D44FA003CFFED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209FA952214D44FA003CFFED /* Main.storyboard */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2088A576214D814000627DFC /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		209FA94B214D44F9003CFFED /* better-belly.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "better-belly.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		209FA94E214D44FA003CFFED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		209FA950214D44FA003CFFED /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				209FA955214D44FF003CFFED /* Assets.xcassets */,
 				209FA957214D44FF003CFFED /* LaunchScreen.storyboard */,
 				209FA95A214D44FF003CFFED /* Info.plist */,
+				2088A576214D814000627DFC /* ImageViewController.swift */,
 			);
 			path = "better-belly";
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 			files = (
 				2607D875214D68750022EA74 /* PageViewController.swift in Sources */,
 				209FA951214D44FA003CFFED /* ViewController.swift in Sources */,
+				2088A577214D814000627DFC /* ImageViewController.swift in Sources */,
 				209FA94F214D44FA003CFFED /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,14 +291,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z54VZ9PTP6;
+				DEVELOPMENT_TEAM = 8YK8DXZM9G;
 				INFOPLIST_FILE = "better-belly/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "htn.better-belly.gh";
+				PRODUCT_BUNDLE_IDENTIFIER = "htn.better-belly.ak";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -306,14 +310,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z54VZ9PTP6;
+				DEVELOPMENT_TEAM = 8YK8DXZM9G;
 				INFOPLIST_FILE = "better-belly/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "htn.better-belly.gh";
+				PRODUCT_BUNDLE_IDENTIFIER = "htn.better-belly.ak";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

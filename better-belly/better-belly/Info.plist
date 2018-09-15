@@ -25,9 +25,13 @@
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
 	<key>UIRequiredDeviceCapabilities</key>
-	<array>
-		<string>armv7</string>
-	</array>
+	<array/>
+	<key>Privacy - Camera Usage Description </key>
+	<string>This is to allow better belly to scan your food</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>This is to allow you to scan images on your camera roll</string>
+	<key>NSCameraUsageDescription</key>
+	<string>This is to allow better belly to scan your food</string>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
