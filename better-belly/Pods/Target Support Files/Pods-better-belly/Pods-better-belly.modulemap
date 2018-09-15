@@ -1,0 +1,6 @@
+framework module Pods_better_belly {
+  umbrella header "Pods-better-belly-umbrella.h"
+
+  export *
+  module * { export * }
+}

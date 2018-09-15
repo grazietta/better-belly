@@ -7,29 +7,23 @@
 //
 
 import UIKit
+import Charts
 
 class BarChartViewController: UIViewController {
-
+    
     override func viewDidLoad() {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd"
+        
+        let fakeData : [Date:Float] = [
+            formatter.date(from: "09/15")! : 60,
+            formatter.date(from: "09/16")! : 70,
+            formatter.date(from: "09/17")! : 80,
+            formatter.date(from: "09/18")! : 60,
+            formatter.date(from: "09/15")! : 10
+        ]
+        
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
