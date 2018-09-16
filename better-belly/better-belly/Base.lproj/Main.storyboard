@@ -55,6 +55,32 @@
                                     <segue destination="Pux-Op-8rw" kind="show" id="kKw-Kq-XTy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GaS-XA-JfW">
+                                <rect key="frame" x="97" y="451" width="70" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="forkButton" image="fork icon">
+                                    <color key="titleShadowColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="forkButtonPressed:" destination="I7b-mn-jQr" eventType="touchUpInside" id="Hu2-J0-k9E"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="center" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cYv-Lp-DPe">
+                                <rect key="frame" x="213" y="451" width="70" height="61"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <accessibility key="accessibilityConfiguration">
+                                    <accessibilityTraits key="traits" button="YES" image="YES"/>
+                                </accessibility>
+                                <state key="normal" title="notForkIcon" image="no fork icon">
+                                    <color key="titleShadowColor" red="0.66422420739999999" green="0.66424006219999998" blue="0.66423153879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="notForkButtonPressed:" destination="I7b-mn-jQr" eventType="touchUpInside" id="94f-0s-EIl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LLV-WG-7CA"/>
@@ -63,7 +89,9 @@
                     <connections>
                         <outlet property="accountButton" destination="ok7-rw-80X" id="Mlc-u7-SbK"/>
                         <outlet property="cameraButton" destination="LGe-GW-ayW" id="Ue6-vS-OqT"/>
+                        <outlet property="forkButton" destination="GaS-XA-JfW" id="MiU-E6-YEq"/>
                         <outlet property="imageView" destination="rf6-5x-2Co" id="abJ-39-yfu"/>
+                        <outlet property="notForkButton" destination="cYv-Lp-DPe" id="rpx-iV-Qih"/>
                         <outlet property="statsButton" destination="d5n-aO-xlh" id="sVt-cO-zby"/>
                     </connections>
                 </viewController>
@@ -179,6 +207,8 @@
     <resources>
         <image name="camera icon" width="142" height="142"/>
         <image name="defualtImage" width="453" height="451"/>
+        <image name="fork icon" width="143" height="142"/>
+        <image name="no fork icon" width="143" height="142"/>
         <image name="person icon" width="162" height="142"/>
         <image name="results icon" width="143" height="142"/>
     </resources>

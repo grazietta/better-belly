@@ -17,8 +17,8 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     
-    @IBOutlet weak var notForkButton: UIButton!
     @IBOutlet weak var forkButton: UIButton!
+    @IBOutlet weak var notForkButton: UIButton!
     
     let content = UNMutableNotificationContent()
     
