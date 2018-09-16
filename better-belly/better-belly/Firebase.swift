@@ -15,7 +15,34 @@ class Firebase {
         return Database.database().reference()
     }()
     
-    static var userRef = ref.childByAutoId()
+    static var userRef = ref.child("Users").childByAutoId()
+
+    static func fetchHighCounts() {
+      userRef.child("dates").child("ingredients").setValue("sugar")
+        
+//        let refHandle = Firebase.userRef.child("dates").queryLimited(toFirst: 5).observe(DataEventType.value, with: { (snapshot) in
+//            for date in snapshot.children.allObjects as! [DataSnapshot] {
+//                print(date)
+//            }
+//        })
+    }
+    
+    func fetchLowCounts() {
+        
+        
+    }
+    
+    func incrementHighCounter() {
+        
+    }
+    
+    func incrementLowCounter() {
+        
+    }
+    
+    func fetchDates() {
+      
+    }
 }
 
 

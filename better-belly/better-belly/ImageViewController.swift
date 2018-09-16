@@ -16,6 +16,9 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     
+    @IBAction func pushme(_ sender: Any) {
+        Firebase.fetchHighCounts()
+    }
     //-1 = grey outline: image not processed and/or uploaded
     // 0 = red outline: don't eat
     // 1 = green outline: eat
@@ -42,7 +45,9 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        FirebaseApp.configure()
+        
+        Firebase.fetchHighCounts()
+        
         accountButton.setImage(UIImage(named: "person icon.png"), for: .normal)
         
         cameraButton.setImage(UIImage(named: "camera icon.png"), for: .normal)

@@ -55,6 +55,14 @@
                                     <segue destination="Pux-Op-8rw" kind="show" id="kKw-Kq-XTy"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5bs-AG-8hs">
+                                <rect key="frame" x="159" y="443" width="73" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="push me :)"/>
+                                <connections>
+                                    <action selector="pushme:" destination="I7b-mn-jQr" eventType="touchUpInside" id="2tR-ig-FyE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="LLV-WG-7CA"/>
@@ -178,9 +186,9 @@
     </scenes>
     <resources>
         <image name="camera icon" width="142" height="142"/>
-        <image name="defualtImage" width="112" height="112"/>
+        <image name="defualtImage" width="453" height="451"/>
         <image name="person icon" width="162" height="142"/>
-        <image name="results icon" width="142" height="142"/>
+        <image name="results icon" width="143" height="142"/>
     </resources>
-    <color key="tintColor" red="0.49459295349999999" green="0.88059168779999997" blue="0.82808325770000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+    <color key="tintColor" red="0.50980392156862742" green="0.78823529411764703" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
 </document>
