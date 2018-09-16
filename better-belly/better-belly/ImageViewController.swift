@@ -66,8 +66,6 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
                 imageView.layer.borderColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
             }
             x = newValue;
-            
-            
         }
         get{
             return x;
@@ -79,8 +77,6 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        Firebase.fetchHighCounts()
         
         accountButton.setImage(UIImage(named: "person icon.png"), for: .normal)
         
