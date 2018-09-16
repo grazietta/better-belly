@@ -51,7 +51,8 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         }
         imageView.image = image;
         
-        let imageName = (uid);
+        var imageName = (uid);
+        imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(3))
         let storage = Storage.storage()
         
         let storageRef = storage.reference().child(imageName)
