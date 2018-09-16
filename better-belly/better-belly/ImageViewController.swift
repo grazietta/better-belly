@@ -40,9 +40,6 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
 
     let imagePicker = UIImagePickerController()
     
-    var user:User? = nil;
-    var uid = "8ylt6eVzI9hy6wBXgNgkj00JR3Kg"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         FirebaseApp.configure()
@@ -55,7 +52,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         imageView.layer.borderWidth = 10;
         
         Auth.auth().signInAnonymously() { (authResult, error) in
-            self.user = authResult?.user
+            Firebase.user = authResult?.user
             print("Logged In")
         }
     }
@@ -76,7 +73,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         }
         imageView.image = image;
         
-        var imageName = (uid);
+        var imageName = (Firebase.userRef.key);
         imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(6))
        
         let storage = Storage.storage()
@@ -90,7 +87,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
                 print("Unable to upload file")
             } else {
                 storageRef.downloadURL(completion: { (url, error) in
-                    var ref = Database.database().reference();
+                    let ref = Firebase.ref;
                     ref.child("Filesuploaded").child(imageName).setValue(["upload_url": url?.absoluteString])
                 })
                 //Metadata contains file metadata such as size, content-type, and download URL.
