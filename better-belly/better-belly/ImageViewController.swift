@@ -22,7 +22,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     
     let content = UNMutableNotificationContent()
     
-
+    
     var timer: Timer?;
     var dir:CGFloat = 1;
     var y = false
@@ -32,12 +32,17 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
             if(imageStatus <= 1 && imageStatus >= 0){
                 forkButton.isHidden = false;
                 notForkButton.isHidden = false;
+                accountButton.isHidden = true
+                cameraButton.isHidden = true
+                statsButton.isHidden = true
             }
             else{
                 forkButton.isHidden = true;
                 notForkButton.isHidden = true;
+                accountButton.isHidden = false
+                cameraButton.isHidden = false
+                statsButton.isHidden = false
             }
-
         }
         get{
             return y;
@@ -71,8 +76,8 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
             return x;
         }
     }
-
-
+    
+    
     let imagePicker = UIImagePickerController()
     
     override func viewDidLoad() {
@@ -84,7 +89,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         statsButton.setImage(UIImage(named: "results icon.png"), for: .normal)
         imagePicker.delegate = self
         
-
+        
         timer = Timer.scheduledTimer(timeInterval: 1/20, target: self, selector: #selector(ImageViewController.update), userInfo: nil, repeats: true);
         
         imageView.layer.borderWidth = 10;
@@ -96,7 +101,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     @IBAction func cameraButtonPressed(_ sender: Any) {
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .camera
- 
+        
         
         
         present(imagePicker, animated: true, completion: nil)
@@ -123,7 +128,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         
         var imageName = Firebase.userRef.ref.key!
         imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(6))
-       
+        
         let storage = Storage.storage()
         
         let storageRef = storage.reference().child(imageName)
@@ -138,8 +143,8 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
                     let ref = Firebase.ref;
                     ref.child("Filesuploaded").child(imageName).setValue(["upload_url": url?.absoluteString])
                 })
-                self.dataArrived(val: 1)
-
+                //self.dataArrived(val: 1)//Call this func with results that come from gcp
+                
             }
         }
     }
@@ -150,16 +155,23 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         //Metadata contains file metadata such as size, content-type, and download URL.
         self.imageStatus = val;
         self.needResponse = !self.needResponse;
-    
+        
     }
     func dataSent(){
         //self.needResponse = !self.needResponse;
         imageStatus = -2;
-        
+        Firebase.mealStatusChanged(callback: { (snapshot) in
+            
+            switch snapshot.value as! String {
+            case "good":
+                self.imageStatus = 1
+            case "bad":
+                self.imageStatus = 0
+            default:
+                self.imageStatus = -1
+            }
+        })
     }
-    
-
-    
     
     @objc func update(){
         if(imageStatus != -2){
