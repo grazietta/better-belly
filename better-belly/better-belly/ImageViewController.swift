@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase;
+import UserNotifications
 
 class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
@@ -16,15 +17,38 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     
-    @IBAction func pushme(_ sender: Any) {
-        Firebase.fetchHighCounts()
-    }
+    @IBOutlet weak var notForkButton: UIButton!
+    @IBOutlet weak var forkButton: UIButton!
+    
+    let content = UNMutableNotificationContent()
+    
+
     var timer: Timer?;
     var dir:CGFloat = 1;
+    var y = false
+    var needResponse: Bool {
+        set{
+            y = newValue;
+            if(imageStatus <= 1 && imageStatus >= 0){
+                forkButton.isHidden = false;
+                notForkButton.isHidden = false;
+            }
+            else{
+                forkButton.isHidden = true;
+                notForkButton.isHidden = true;
+            }
+
+        }
+        get{
+            return y;
+        }
+    }
+    
     //-2 = animation: image processing
     //-1 = grey outline: image not processed and/or uploaded
     // 0 = red outline: don't eat
     // 1 = green outline: eat
+    // 2 = done rating
     var x = -1;
     var imageStatus: Int {
         set{
@@ -34,6 +58,9 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
                 break;
             case 1:
                 imageView.layer.borderColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+                break;
+            case 2:
+                break;
                 
             default:
                 imageView.layer.borderColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
@@ -72,15 +99,24 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     }
     @IBAction func cameraButtonPressed(_ sender: Any) {
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
+        imagePicker.sourceType = .photoLibrary
         
         present(imagePicker, animated: true, completion: nil)
         
     }
+    @IBAction func forkButtonPressed(_ sender: Any) {
+        imageStatus = 2;
+        needResponse = false;
+        
+    }
+    @IBAction func notForkButtonPressed(_ sender: Any) {
+        imageStatus = 2;
+        needResponse = false;
+    }
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true)
+        dataSent();
         
-        imageStatus = -2;
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
             print("No image found")
             return
@@ -104,15 +140,29 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
                     let ref = Firebase.ref;
                     ref.child("Filesuploaded").child(imageName).setValue(["upload_url": url?.absoluteString])
                 })
-                //Metadata contains file metadata such as size, content-type, and download URL.
-                print("Successfully uploaded file")
-                self.imageStatus = 0;
+                self.dataArrived(val: 1)
+
             }
         }
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
+    func dataArrived(val: Int){
+        //Metadata contains file metadata such as size, content-type, and download URL.
+        self.imageStatus = val;
+        self.needResponse = !self.needResponse;
+    
+    }
+    func dataSent(){
+        //self.needResponse = !self.needResponse;
+        imageStatus = -2;
+        
+    }
+    
+
+    
+    
     @objc func update(){
         if(imageStatus != -2){
             imageView.layer.borderWidth = 10;
