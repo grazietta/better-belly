@@ -16,6 +16,28 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     @IBOutlet weak var cameraButton: UIButton!
     @IBOutlet weak var statsButton: UIButton!
     
+    //-1 = grey outline: image not processed and/or uploaded
+    // 0 = red outline: don't eat
+    // 1 = green outline: eat
+    var imageStatus: Int {
+        set{
+            switch newValue {
+            case 0:
+                imageView.layer.borderColor = #colorLiteral(red: 1, green: 0.1491314173, blue: 0, alpha: 1)
+                break;
+            case 1:
+                imageView.layer.borderColor = #colorLiteral(red: 0.4666666687, green: 0.7647058964, blue: 0.2666666806, alpha: 1)
+                
+            default:
+                imageView.layer.borderColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
+            }
+            
+        }
+        get{
+            return imageStatus;
+        }
+    }
+
     let imagePicker = UIImagePickerController()
     
     var user:User? = nil;
@@ -29,6 +51,8 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         cameraButton.setImage(UIImage(named: "camera icon.png"), for: .normal)
         statsButton.setImage(UIImage(named: "results icon.png"), for: .normal)
         imagePicker.delegate = self
+        
+        imageView.layer.borderWidth = 10;
         
         Auth.auth().signInAnonymously() { (authResult, error) in
             self.user = authResult?.user
@@ -45,6 +69,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true)
         
+        imageStatus = -1;
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
             print("No image found")
             return
@@ -52,7 +77,8 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         imageView.image = image;
         
         var imageName = (uid);
-        imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(3))
+        imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(6))
+       
         let storage = Storage.storage()
         
         let storageRef = storage.reference().child(imageName)
@@ -65,10 +91,11 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
             } else {
                 storageRef.downloadURL(completion: { (url, error) in
                     var ref = Database.database().reference();
-                    ref.child("Processed").child(imageName).setValue(["upload_url": url?.absoluteString])
+                    ref.child("Filesuploaded").child(imageName).setValue(["upload_url": url?.absoluteString])
                 })
                 //Metadata contains file metadata such as size, content-type, and download URL.
                 print("Successfully uploaded file")
+                self.imageStatus = 0;
             }
         }
     }
