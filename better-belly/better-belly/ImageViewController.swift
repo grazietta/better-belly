@@ -95,7 +95,9 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     }
     @IBAction func cameraButtonPressed(_ sender: Any) {
         imagePicker.allowsEditing = true
-        imagePicker.sourceType = .photoLibrary
+        imagePicker.sourceType = .camera
+ 
+        
         
         present(imagePicker, animated: true, completion: nil)
         
