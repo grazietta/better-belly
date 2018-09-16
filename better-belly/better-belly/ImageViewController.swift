@@ -50,11 +50,6 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         imagePicker.delegate = self
         
         imageView.layer.borderWidth = 10;
-        
-        Auth.auth().signInAnonymously() { (authResult, error) in
-            Firebase.user = authResult?.user
-            print("Logged In")
-        }
     }
     @IBAction func cameraButtonPressed(_ sender: Any) {
         imagePicker.allowsEditing = true
