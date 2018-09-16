@@ -73,7 +73,7 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         }
         imageView.image = image;
         
-        var imageName = (Firebase.userRef.key);
+        var imageName = (Firebase.userRef.key!);
         imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(6))
        
         let storage = Storage.storage()
