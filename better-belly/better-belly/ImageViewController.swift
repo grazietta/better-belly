@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase;
 
 class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
@@ -24,15 +25,27 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     
      let imagePicker = UIImagePickerController()
     
+
+    
+    var user:User? = nil;
+    var uid = "8ylt6eVzI9hy6wBXgNgkj00JR3Kg"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        FirebaseApp.configure()
         accountButton.setImage(UIImage(named: "person icon.png"), for: .normal)
         //accountButton.layer.cornerRadius = 0.5 * accountButton.bounds.size.width;
 
         cameraButton.setImage(UIImage(named: "camera icon.png"), for: .normal)
         statsButton.setImage(UIImage(named: "results icon.png"), for: .normal)
         imagePicker.delegate = self
+        
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            self.user = authResult?.user
+            
+            
+            print("Logged In")
+         }
         
         
 
@@ -53,6 +66,32 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
             return
         }
         imageView.image = image;
+        
+        let imageName = (uid);
+        let storage = Storage.storage()
+        
+        
+        let storageRef = storage.reference().child(imageName)
+        
+    
+        
+        let data = UIImageJPEGRepresentation(image,1)
+        
+        let uploadTask = storageRef.putData(data!, metadata: nil) { metadata, error in
+            if (error != nil) {
+                print("Unable to upload file")
+            } else {
+                
+                storageRef.downloadURL(completion: { (url, error) in
+                    var ref = Database.database().reference();
+                    ref.child("Processed").child(imageName).setValue(["upload_url": url?.absoluteString])
+
+
+                })
+                print("Successfully uploaded file")
+                // Metadata contains file metadata such as size, content-type, and download URL.
+            }
+        }
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
