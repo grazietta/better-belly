@@ -19,9 +19,13 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     @IBAction func pushme(_ sender: Any) {
         Firebase.fetchHighCounts()
     }
+    var timer: Timer?;
+    var dir:CGFloat = 1;
+    //-2 = animation: image processing
     //-1 = grey outline: image not processed and/or uploaded
     // 0 = red outline: don't eat
     // 1 = green outline: eat
+    var x = -1;
     var imageStatus: Int {
         set{
             switch newValue {
@@ -34,12 +38,15 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
             default:
                 imageView.layer.borderColor = #colorLiteral(red: 0.6642242074, green: 0.6642400622, blue: 0.6642315388, alpha: 1)
             }
+            x = newValue;
+            
             
         }
         get{
-            return imageStatus;
+            return x;
         }
     }
+
 
     let imagePicker = UIImagePickerController()
     
@@ -54,7 +61,14 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
         statsButton.setImage(UIImage(named: "results icon.png"), for: .normal)
         imagePicker.delegate = self
         
+
+        timer = Timer.scheduledTimer(timeInterval: 1/20, target: self, selector: #selector(ImageViewController.update), userInfo: nil, repeats: true);
+        
         imageView.layer.borderWidth = 10;
+        imageView.layer.cornerRadius = 20;
+        imageView.layer.allowsEdgeAntialiasing = true;
+        imageView.layer.masksToBounds = true;
+        
     }
     @IBAction func cameraButtonPressed(_ sender: Any) {
         imagePicker.allowsEditing = true
@@ -66,14 +80,14 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true)
         
-        imageStatus = -1;
+        imageStatus = -2;
         guard let image = info[UIImagePickerControllerEditedImage] as? UIImage else {
             print("No image found")
             return
         }
         imageView.image = image;
         
-        var imageName = (Firebase.userRef.key);
+        var imageName = Firebase.userRef.ref.key!
         imageName.append(contentsOf: String(Date().timeIntervalSince1970).dropLast(6))
        
         let storage = Storage.storage()
@@ -98,5 +112,19 @@ class ImageViewController: ViewController, UIImagePickerControllerDelegate,UINav
     }
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+    @objc func update(){
+        if(imageStatus != -2){
+            imageView.layer.borderWidth = 10;
+            return;
+        }
+        
+        if(imageView.layer.borderWidth <= 0 || imageView.layer.borderWidth >= 30){
+            dir *= -1;
+        }
+        imageView.layer.borderWidth += dir
+        let c = imageView.layer.borderColor?.copy()?.components!;
+        imageView.layer.borderColor = UIColor(red: c![0], green: c![1], blue: c![2], alpha: 1-imageView.layer.borderWidth/30).cgColor
+        
     }
 }
